@@ -10,14 +10,14 @@ from pytdx.exhq import TdxExHq_API, TDXParams
 
 class Log(object):
     def info(self, *args):
-        pass
+        print(*args)
 
 
 log = Log()
 
 
-test_server_ip = "112.74.214.43"
-
+test_server_ip = "119.147.212.81"
+test_server_port = 7709
 
 def test_all_functions():
 
@@ -31,9 +31,10 @@ def test_all_functions():
 
     api = TdxExHq_API(auto_retry=True)
     try:
-        with api.connect(test_server_ip, 7727, time_out=30):
+        with api.connect(test_server_ip, test_server_port):
             log.info("获取市场代码")
             data = api.get_markets()
+            print(data)
             assert data is not None
             assert type(data) is list
             assert len(data) > 0
